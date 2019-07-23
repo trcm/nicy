@@ -94,6 +94,13 @@ proc getCwd*(): string =
   except OSError:
     result = "[not found]"
 
+proc nixShell*(): string =
+  let env = getEnv("IN_NIX_SHELL")
+  if env.len == 0:
+    result = ""
+  else:
+    result = "NIX-SHELL:"
+    
 proc virtualenv*(): string =
   let env = getEnv("VIRTUAL_ENV")
   result = extractFilename(env) & " "

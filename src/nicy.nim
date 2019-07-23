@@ -7,13 +7,16 @@ export
 
 when isMainModule:
   let
-    prompt = color("› ", "magenta")
+    prompt = color("λ ", "magenta")
+    nix = color(nixShell(), "green")
     nl = "\n"
     gitBranch = color(gitBranch(), "yellow")
-    cwd = color(tilde(getCwd()), "cyan")
+    cwd = bold(color(tilde(getCwd()), "cyan"))
     dirty = color("×", "red")
     clean = color("•", "green")
   let git = gitBranch & gitStatus(dirty, clean)
 
   # the prompt
-  echo fmt"{nl}{virtualenv()}{cwd}{git}{nl}{prompt}"
+  echo fmt"{nix}{virtualenv()}{cwd}{git}{nl}{prompt}"
+
+
